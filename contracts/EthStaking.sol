@@ -3,10 +3,8 @@ pragma solidity ^0.8.28;
 
 import "./TransferHelper.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
-//import "hardhat/console.sol";
 
-contract EthStaking is Ownable,ReentrancyGuard{
+contract EthStaking is Ownable{
     uint256 public totalStaked;
     uint256 public lockingTime;
     bool public stake_paused;
@@ -84,6 +82,9 @@ contract EthStaking is Ownable,ReentrancyGuard{
             }
         }
         return total;
+    }
+    function stakeInfos(address user)public view returns(StakeInfo[] memory){
+        return staking[user];
     }
 
     function getAccumulatedPoint(address user ) public view returns(uint256) {
